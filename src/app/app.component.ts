@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RestartDialogComponent } from './restart-dialog/restart-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { CardData } from './card-data.model'
+import { RestartDialogComponent } from './restart-dialog/restart-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,6 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'angular-card-memory-game';
 
   cardImages = [
     'pDGNBK9A0sk',
@@ -18,36 +18,11 @@ export class AppComponent implements OnInit {
     'TQ-q5WAVHj0'
   ];
 
-cards: CardData[] = [];
+  cards: CardData[] = [];
 
-flippedCards: CardData[] = [];
-  matchedCount: number;
+  flippedCards: CardData[] = [];
 
-
-  constructor(private dialog: MatDialog) {
-
-  }
-
-
-  ngOnInit(): void {
-      this.setupCards();
-  }
-
-
-  setupCards(){
-    this.cards = [];
-    this.cardImages.forEach((image) => {
-      const cardData: CardData = {
-        imageId: image,
-        state: 'default'
-      };
-
-      this.cards.push({...cardData});
-      this.cards.push({...cardData});
-
-    })
-    this.cards = this.shuffleArray(this.cards);
-  }
+  matchedCount = 0;
 
   shuffleArray(anArray: any[]): any[] {
     return anArray.map(a => [Math.random(), a])
@@ -55,18 +30,40 @@ flippedCards: CardData[] = [];
       .map(a => a[1]);
   }
 
+  constructor(private dialog: MatDialog) {
+
+  }
+
+  ngOnInit(): void {
+    this.setupCards();
+  }
+
+  setupCards(): void {
+    this.cards = [];
+    this.cardImages.forEach((image) => {
+      const cardData: CardData = {
+        imageId: image,
+        state: 'default'
+      };
+
+      this.cards.push({ ...cardData });
+      this.cards.push({ ...cardData });
+
+    });
+
+    this.cards = this.shuffleArray(this.cards);
+  }
 
   cardClicked(index: number): void {
-    const cardInfo: CardData = this.cards[index];
+    const cardInfo = this.cards[index];
 
-    if (cardInfo.state === 'default' && this.flippedCards.length < 2)
-    {
+    if (cardInfo.state === 'default' && this.flippedCards.length < 2) {
       cardInfo.state = 'flipped';
       this.flippedCards.push(cardInfo);
 
-      if (this.flippedCards.length === 2) {
+      if (this.flippedCards.length > 1) {
         this.checkForCardMatch();
-     }
+      }
 
     } else if (cardInfo.state === 'flipped') {
       cardInfo.state = 'default';
@@ -104,15 +101,6 @@ flippedCards: CardData[] = [];
   restart(): void {
     this.matchedCount = 0;
     this.setupCards();
-}
+  }
 
-
-
-
-}
-
-
-export interface CardData {
-  imageId: string;
-  state: "default" | "flipped" | "matched";
 }
