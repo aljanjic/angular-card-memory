@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
 cards: CardData[] = [];
 
 flippedCards: CardData[] = [];
+  matchedCount: number;
 
   ngOnInit(): void {
       this.setupCards();
@@ -65,9 +66,36 @@ flippedCards: CardData[] = [];
     }
   }
 
-  checkForCardMatch(){
+  checkForCardMatch(): void {
+    setTimeout(() => {
+      const cardOne = this.flippedCards[0];
+      const cardTwo = this.flippedCards[1];
+      const nextState = cardOne.imageId === cardTwo.imageId ? 'matched' : 'default';
+      cardOne.state = cardTwo.state = nextState;
 
+      this.flippedCards = [];
+
+      if (nextState === 'matched') {
+        this.matchedCount++;
+
+        if (this.matchedCount === this.cardImages.length) {
+          const dialogRef = this.dialog.open(RestartDialogComponent, {
+            disableClose: true
+          });
+
+          dialogRef.afterClosed().subscribe(() => {
+            this.restart();
+          });
+        }
+      }
+
+    }, 1000);
   }
+
+  restart(): void {
+    this.matchedCount = 0;
+    this.setupCards();
+}
 
 
 
