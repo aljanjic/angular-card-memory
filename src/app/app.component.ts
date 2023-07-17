@@ -18,6 +18,8 @@ export class AppComponent implements OnInit {
 
 cards: CardData[] = [];
 
+flippedCards: CardData[] = [];
+
   ngOnInit(): void {
       this.setupCards();
   }
@@ -44,9 +46,29 @@ cards: CardData[] = [];
       .map(a => a[1]);
   }
 
-  cardClicked(index: number){
+  cardClicked(index: number): void {
+    const cardInfo: CardData = this.cards[index];
+
+    if (cardInfo.state === 'default' && this.flippedCards.length < 2)
+    {
+      cardInfo.state = 'flipped';
+      this.flippedCards.push(cardInfo);
+
+      if (this.flippedCards.length === 2) {
+        this.checkForCardMatch();
+     }
+
+    } else if (cardInfo.state === 'flipped') {
+      cardInfo.state = 'default';
+      this.flippedCards.pop();
+
+    }
+  }
+
+  checkForCardMatch(){
 
   }
+
 
 
 
