@@ -1,7 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 
-
 @Component({
   selector: 'app-game-card',
   templateUrl: './game-card.component.html',
@@ -23,7 +22,7 @@ import { Component } from '@angular/core';
     ])
   ]
 })
-export class GameCardComponent {
+export class GameCardComponent{
 
   data: CardData = {
     imageId: "pDGNBK9A0sk",
@@ -43,9 +42,10 @@ export class GameCardComponent {
 
 }
 
-
 export interface CardData {
   imageId: string;
   state: "default" | "flipped" | "matched";
 }
+
+
 
