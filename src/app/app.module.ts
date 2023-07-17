@@ -8,11 +8,13 @@ import { GameCardComponent } from './game-card/game-card.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RestartDialogComponent } from './restart-dialog/restart-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GameCardComponent
+    GameCardComponent,
+    RestartDialogComponent
   ],
   imports: [
     BrowserModule,

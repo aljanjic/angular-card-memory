@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RestartDialogComponent } from './restart-dialog/restart-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +22,12 @@ cards: CardData[] = [];
 
 flippedCards: CardData[] = [];
   matchedCount: number;
+
+
+  constructor(private dialog: MatDialog) {
+
+  }
+
 
   ngOnInit(): void {
       this.setupCards();
@@ -46,6 +54,7 @@ flippedCards: CardData[] = [];
       .sort((a, b) => a[0] - b[0])
       .map(a => a[1]);
   }
+
 
   cardClicked(index: number): void {
     const cardInfo: CardData = this.cards[index];
