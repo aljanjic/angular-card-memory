@@ -44,7 +44,9 @@ cards: CardData[] = [];
       .map(a => a[1]);
   }
 
+  cardClicked(index: number){
 
+  }
 
 
 

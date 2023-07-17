@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-game-card',
@@ -24,7 +24,7 @@ import { Component } from '@angular/core';
 })
 export class GameCardComponent{
 
-  data: CardData = {
+  @Input() data: CardData = {
     imageId: "pDGNBK9A0sk",
     state: "default",
   };
