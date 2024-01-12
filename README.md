@@ -1,5 +1,7 @@
 # AngularCardMemoryGame
 
+App can be found on: https://memory-game-ng.web.app/ 
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.4.
 
 ## Development server
