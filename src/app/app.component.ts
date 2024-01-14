@@ -13,9 +13,9 @@ export class AppComponent implements OnInit {
   cardImages = [
     'pDGNBK9A0sk',
     'fYDrhbVlV1E',
-    'qoXgaF27zBc',
     'b9drVB7xIOI',
-    'TQ-q5WAVHj0'
+    't2-r0_On-3qVgM',
+    'qoXgaF27zBc'
   ];
 
   cards: CardData[] = [];
