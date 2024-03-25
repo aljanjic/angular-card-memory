@@ -102,5 +102,4 @@ export class AppComponent implements OnInit {
     this.matchedCount = 0;
     this.setupCards();
   }
-
 }
